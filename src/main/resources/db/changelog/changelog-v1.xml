@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Arseniy">
+
+        <!--        VEHICLE TABLE-->
+        <createTable tableName="vehicle_library">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="state_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vehicle_model" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fuel_amount" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="distance_for_vehicle" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="bool">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--        FARE TABLE-->
+        <createTable tableName="fare_library">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="vehicle_model" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="minute_price" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hour_price" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="day_price" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--        CLIENT TABLE-->
+        <createTable tableName="client_library">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_vehicle" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
