@@ -1,7 +1,7 @@
 package com.arseeniy.mycarsharing.service;
 
 import com.arseeniy.mycarsharing.common.VehicleViewer;
-import com.arseeniy.mycarsharing.entity.Vehicle;
+import com.arseeniy.mycarsharing.entity.booking.Vehicle;
 import com.arseeniy.mycarsharing.repository.ClientRepository;
 import com.arseeniy.mycarsharing.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ import java.util.List;
 public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
-    VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @Override
     public int getVehicleRunningDistance(int fuelAmount) {
@@ -25,15 +25,16 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public String bookVehicle(String stateNumber, String userName) {
-        vehicleRepository.findByStateNumber(stateNumber).setStatus(true);
-        clientRepository.findByUserName(userName).setCurrentVehicle(stateNumber);
+        vehicleRepository.bookVehicle(stateNumber);
+        clientRepository.bookVehicle(stateNumber, userName);
         return "Автомобиль забронирован!";
     }
 
+
     @Override
     public String closeRenting(String stateNumber, String userName) {
-        vehicleRepository.findByStateNumber(stateNumber).setStatus(false);
-        clientRepository.findByUserName(userName).setCurrentVehicle(null);
+        vehicleRepository.closeRenting(stateNumber);
+        clientRepository.closeRenting(userName);
         return "Поездка завершена!";
     }
 

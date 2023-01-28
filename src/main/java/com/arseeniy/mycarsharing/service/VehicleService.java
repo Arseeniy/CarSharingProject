@@ -1,7 +1,7 @@
 package com.arseeniy.mycarsharing.service;
 
 import com.arseeniy.mycarsharing.common.VehicleViewer;
-import com.arseeniy.mycarsharing.entity.Vehicle;
+import com.arseeniy.mycarsharing.entity.booking.Vehicle;
 
 import java.util.List;
 

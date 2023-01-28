@@ -1,10 +1,14 @@
-package com.arseeniy.mycarsharing.entity;
+package com.arseeniy.mycarsharing.entity.booking;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "vehicle_library")
 public class Vehicle {

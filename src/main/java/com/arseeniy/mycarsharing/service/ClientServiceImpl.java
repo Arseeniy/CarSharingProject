@@ -1,8 +1,8 @@
 package com.arseeniy.mycarsharing.service;
 
-import com.arseeniy.mycarsharing.ClientNotFoundException;
-import com.arseeniy.mycarsharing.NoSuchElementFoundException;
-import com.arseeniy.mycarsharing.entity.Client;
+import com.arseeniy.mycarsharing.dto.ClientDto;
+import com.arseeniy.mycarsharing.exception.ClientNotFoundException;
+import com.arseeniy.mycarsharing.entity.booking.Client;
 import com.arseeniy.mycarsharing.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,22 +13,22 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @Override
-    public String createClient(String firstName, String lastName, String userName, String password) {
+    public String createClient(ClientDto clientDto) {
 
         List<Client> existClientsList = clientRepository.findAll();
         for (Client certainClient : existClientsList) {
-            if (certainClient.getUserName().equals(userName)) {
+            if (certainClient.getUserName().equals(clientDto.getUserName())) {
                 return "Пользователь с таким именем уже существует";
             }
         }
         Client newClient = new Client();
-        newClient.setFirstName(firstName);
-        newClient.setLastName(lastName);
-        newClient.setUserName(userName);
-        newClient.setPassword(password);
+        newClient.setFirstName(clientDto.getFirstName());
+        newClient.setLastName(clientDto.getLastName());
+        newClient.setUserName(clientDto.getUserName());
+        newClient.setPassword(clientDto.getPassword());
         clientRepository.save(newClient);
 
         return "Регистрация прошла успешно!";

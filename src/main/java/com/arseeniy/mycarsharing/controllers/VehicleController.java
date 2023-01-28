@@ -1,25 +1,23 @@
 package com.arseeniy.mycarsharing.controllers;
 
 import com.arseeniy.mycarsharing.common.VehicleViewer;
-import com.arseeniy.mycarsharing.entity.Vehicle;
+import com.arseeniy.mycarsharing.entity.booking.Vehicle;
 import com.arseeniy.mycarsharing.repository.VehicleRepository;
 import com.arseeniy.mycarsharing.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
 
     @Autowired
-    VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
 
     @Autowired
-    VehicleService vehicleService;
+    private VehicleService vehicleService;
 
 
     @GetMapping("/getAvailable")
@@ -27,17 +25,17 @@ public class VehicleController {
         return vehicleService.getAvailableVehicleList(vehicleRepository.findAll());
     }
 
-    @GetMapping("/getByNumber/{stateNumber}")
-    public Vehicle getByStateNumber(@PathVariable String stateNumber) {
+    @GetMapping("/chooseForBooking/{stateNumber}")
+    public Vehicle chooseForBooking(@PathVariable String stateNumber) {
         return vehicleRepository.findByStateNumber(stateNumber);
     }
 
-    @PostMapping("/book/{stateNumber}")
+    @PatchMapping("/book/{stateNumber}/{userName}")
     public String bookVehicle(@PathVariable String stateNumber, @PathVariable String userName) {
         return vehicleService.bookVehicle(stateNumber, userName);
     }
 
-    @PostMapping("/closeRenting/{stateNumber}/userName")
+    @PatchMapping("/closeRenting/{stateNumber}/{userName}")
     public String closeVehicleRenting(@PathVariable String stateNumber, @PathVariable String userName) {
         return vehicleService.closeRenting(stateNumber, userName);
     }

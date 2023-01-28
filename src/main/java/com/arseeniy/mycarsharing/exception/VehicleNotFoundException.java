@@ -1,4 +1,4 @@
-package com.arseeniy.mycarsharing;
+package com.arseeniy.mycarsharing.exception;
 
 public class VehicleNotFoundException extends RuntimeException {
 

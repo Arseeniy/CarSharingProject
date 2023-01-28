@@ -1,11 +1,15 @@
-package com.arseeniy.mycarsharing.entity;
+package com.arseeniy.mycarsharing.entity.booking;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "client_library")
 public class Client {
