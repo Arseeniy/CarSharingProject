@@ -1,7 +1,7 @@
 package com.arseeniy.mycarsharing.repository;
 
-import com.arseeniy.mycarsharing.entity.authorization.ERole;
-import com.arseeniy.mycarsharing.entity.authorization.Role;
+import com.arseeniy.mycarsharing.common.entity.authorization.ERole;
+import com.arseeniy.mycarsharing.common.entity.authorization.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

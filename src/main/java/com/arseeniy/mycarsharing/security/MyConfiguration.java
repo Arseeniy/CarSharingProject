@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MyConfiguration {
-
-    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()

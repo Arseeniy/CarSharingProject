@@ -1,6 +1,6 @@
 package com.arseeniy.mycarsharing.repository;
 
-import com.arseeniy.mycarsharing.entity.booking.Vehicle;
+import com.arseeniy.mycarsharing.common.entity.booking.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -48,8 +48,8 @@
             </column>
         </createTable>
 
-        <!--        CLIENT TABLE-->
-        <createTable tableName="client_library">
+        <!--        USERS TABLE-->
+        <createTable tableName="users_library">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -59,16 +59,65 @@
             <column name="last_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="birth_date" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="user_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="password" type="varchar(255)">
+            </column>
+            <column name="passport_details" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="current_vehicle" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
         </createTable>
+
+        <!--        ROLES TABLE-->
+        <createTable tableName="roles">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)">
+            </column>
+        </createTable>
+
+        <!--        USER_ROLES TABLE-->
+        <createTable tableName="user_roles">
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--                &lt;!&ndash;        USER TABLE&ndash;&gt;-->
+        <!--                <sql>-->
+        <!--                    CREATE TABLE users_library(-->
+        <!--                    id bigint NOT NULL CONSTRAINT PRIMARY KEY,-->
+        <!--                    first_name varchar(255) NOT NULL,-->
+        <!--                    last_name varchar(255) NOT NULL,-->
+        <!--                    username varchar(255) NOT NULL,-->
+        <!--                    email varchar(255) NOT NULL,-->
+        <!--                    password varchar(255),-->
+        <!--                    passport_details varchar(255) NOT NULL,-->
+        <!--                    current_vehicle varchar(255)-->
+        <!--                    );-->
+        <!--                </sql>-->
+
+        <!--        &lt;!&ndash;        ROLE TABLE&ndash;&gt;-->
+        <!--                <sql>-->
+        <!--                    CREATE TABLE roles(-->
+        <!--                    id int NOT NULL,-->
+        <!--                    name varchar(20)-->
+        <!--                    );-->
+        <!--                </sql>>-->
     </changeSet>
 
 </databaseChangeLog>

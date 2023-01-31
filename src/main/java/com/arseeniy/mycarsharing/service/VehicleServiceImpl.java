@@ -1,8 +1,8 @@
 package com.arseeniy.mycarsharing.service;
 
-import com.arseeniy.mycarsharing.common.VehicleViewer;
-import com.arseeniy.mycarsharing.entity.booking.Vehicle;
-import com.arseeniy.mycarsharing.repository.ClientRepository;
+import com.arseeniy.mycarsharing.common.dto.VehicleViewer;
+import com.arseeniy.mycarsharing.common.entity.booking.Vehicle;
+import com.arseeniy.mycarsharing.repository.UserRepository;
 import com.arseeniy.mycarsharing.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
     @Autowired
-    private ClientRepository clientRepository;
+    private UserRepository userRepository;
 
     @Override
     public int getVehicleRunningDistance(int fuelAmount) {
@@ -26,7 +27,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public String bookVehicle(String stateNumber, String userName) {
         vehicleRepository.bookVehicle(stateNumber);
-        clientRepository.bookVehicle(stateNumber, userName);
+        userRepository.bookVehicle(stateNumber, userName);
         return "Автомобиль забронирован!";
     }
 
@@ -34,7 +35,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public String closeRenting(String stateNumber, String userName) {
         vehicleRepository.closeRenting(stateNumber);
-        clientRepository.closeRenting(userName);
+        userRepository.closeRenting(userName);
         return "Поездка завершена!";
     }
 
