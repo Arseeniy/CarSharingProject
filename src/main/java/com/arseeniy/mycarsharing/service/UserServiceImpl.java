@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,12 @@ public class UserServiceImpl implements UserService {
 
     public ResponseEntity<?> authenticateUser(String username, String password) {
 
+        if (!userRepository.existsByUsername(username)){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("User does not exist! Please, try once more or create account"));
+        }
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
 
@@ -55,11 +62,11 @@ public class UserServiceImpl implements UserService {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
+        return ResponseEntity.ok(new JwtResponse(
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                roles,
+                jwt));
     }
 
     @Override

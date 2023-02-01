@@ -37,13 +37,13 @@
             <column name="vehicle_model" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="minute_price" type="int">
+            <column name="minute_price" type="double precision">
                 <constraints nullable="false"/>
             </column>
-            <column name="hour_price" type="int">
+            <column name="hour_price" type="double precision">
                 <constraints nullable="false"/>
             </column>
-            <column name="day_price" type="int">
+            <column name="day_price" type="double precision">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -87,6 +87,22 @@
             </column>
         </createTable>
 
+        <!--         POPULATE ROLES-->
+        <insert tableName="roles">
+            <column name="id" value="1"/>
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="id" value="2"/>
+            <column name="name" value="ROLE_SUPPORT"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="id" value="3"/>
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+
         <!--        USER_ROLES TABLE-->
         <createTable tableName="user_roles">
             <column name="user_id" type="int">
@@ -96,28 +112,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <!--                &lt;!&ndash;        USER TABLE&ndash;&gt;-->
-        <!--                <sql>-->
-        <!--                    CREATE TABLE users_library(-->
-        <!--                    id bigint NOT NULL CONSTRAINT PRIMARY KEY,-->
-        <!--                    first_name varchar(255) NOT NULL,-->
-        <!--                    last_name varchar(255) NOT NULL,-->
-        <!--                    username varchar(255) NOT NULL,-->
-        <!--                    email varchar(255) NOT NULL,-->
-        <!--                    password varchar(255),-->
-        <!--                    passport_details varchar(255) NOT NULL,-->
-        <!--                    current_vehicle varchar(255)-->
-        <!--                    );-->
-        <!--                </sql>-->
-
-        <!--        &lt;!&ndash;        ROLE TABLE&ndash;&gt;-->
-        <!--                <sql>-->
-        <!--                    CREATE TABLE roles(-->
-        <!--                    id int NOT NULL,-->
-        <!--                    name varchar(20)-->
-        <!--                    );-->
-        <!--                </sql>>-->
     </changeSet>
 
 </databaseChangeLog>

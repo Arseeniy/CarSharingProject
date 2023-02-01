@@ -24,12 +24,12 @@ public class Fare {
     private String vehicleModel;
 
     @Column(name = "minutePrice")
-    private Integer minutePrice;
+    private Double minutePrice;
 
     @Column(name = "hourPrice")
-    private Integer hourPrice;
+    private Double hourPrice;
 
     @Column(name = "dayPrice")
-    private Integer dayPrice;
+    private Double dayPrice;
 
 }

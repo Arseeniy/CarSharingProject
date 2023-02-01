@@ -1,6 +1,5 @@
 package com.arseeniy.mycarsharing.service.security;
 
-import com.arseeniy.mycarsharing.common.entity.authorization.User;
 import com.arseeniy.mycarsharing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,9 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        return UserDetailsImpl.build(user);
+        return UserDetailsImpl.build(userRepository.findByUsername(username));
     }
 }

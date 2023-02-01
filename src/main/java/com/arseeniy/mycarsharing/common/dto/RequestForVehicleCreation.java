@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VehicleDto {
+public class RequestForVehicleCreation {
 
     private String stateNumber;
 

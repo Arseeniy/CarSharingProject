@@ -4,6 +4,7 @@ import com.arseeniy.mycarsharing.common.entity.booking.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,8 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     List<Vehicle> findAllByVehicleModel(String vehicleModel);
 
+    Boolean existsByStateNumber(String stateNumber);
+
     void deleteAll();
 
     void deleteByStateNumber(String stateNumber);
@@ -27,7 +30,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE vehicle_library SET status = :true WHERE stateNumber = :stateNumber", nativeQuery = true)
-    void bookVehicle(String stateNumber);
+    void bookVehicle(@Param("stateNumber") String stateNumber);
 
     @Modifying
     @Transactional

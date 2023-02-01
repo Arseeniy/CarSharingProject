@@ -1,6 +1,7 @@
 package com.arseeniy.mycarsharing.controller;
 
-import com.arseeniy.mycarsharing.common.dto.VehicleDto;
+import com.arseeniy.mycarsharing.common.dto.RequestForVehicleCreation;
+import com.arseeniy.mycarsharing.common.dto.VehicleForBooking;
 import com.arseeniy.mycarsharing.common.dto.VehicleViewer;
 import com.arseeniy.mycarsharing.common.entity.booking.Vehicle;
 import com.arseeniy.mycarsharing.repository.VehicleRepository;
@@ -34,15 +35,15 @@ public class VehicleController {
     @GetMapping("/chooseForBooking/{stateNumber}")
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
     @PreAuthorize("hasRole('USER') or hasRole('SUPPORT') or hasRole('ADMIN')")
-    public Vehicle chooseForBooking(@PathVariable String stateNumber) {
-        return vehicleRepository.findByStateNumber(stateNumber);
+    public VehicleForBooking chooseForBooking(@PathVariable String stateNumber) {
+        return vehicleService.chooseForBooking(stateNumber);
     }
 
-    @PatchMapping("/book/{stateNumber}/{userName}")
+    @PatchMapping("/book/{stateNumber}/{username}")
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
     @PreAuthorize("hasRole('USER') or hasRole('SUPPORT') or hasRole('ADMIN')")
-    public String bookVehicle(@PathVariable String stateNumber, @PathVariable String userName) {
-        return vehicleService.bookVehicle(stateNumber, userName);
+    public String bookVehicle(@PathVariable String stateNumber, String username) {
+        return vehicleService.bookVehicle(stateNumber, username);
     }
 
     @PatchMapping("/closeRenting/{stateNumber}/{userName}")
@@ -59,7 +60,7 @@ public class VehicleController {
         return vehicleRepository.findAllByVehicleModel(vehicleModel);
     }
 
-    @DeleteMapping("/deleteByNumber")
+    @DeleteMapping("/deleteByStateNumber/{stateNumber}")
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
     @PreAuthorize("hasRole('SUPPORT') or hasRole('ADMIN')")
     public void deleteByStateNumber(@PathVariable String stateNumber) {
@@ -69,9 +70,9 @@ public class VehicleController {
     @PostMapping("/create")
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
     @PreAuthorize("hasRole('SUPPORT') or hasRole('ADMIN')")
-    public String createVehicle(@Valid @RequestBody VehicleDto vehicleDto) {
-        vehicleRepository.save(new Vehicle(vehicleDto.getStateNumber(), vehicleDto.getVehicleModel(),
-                vehicleDto.getFuelAmount(), vehicleDto.getDistanceForVehicle()));
+    public String createVehicle(@Valid @RequestBody RequestForVehicleCreation requestForVehicleCreation) {
+        vehicleRepository.save(new Vehicle(requestForVehicleCreation.getStateNumber(), requestForVehicleCreation.getVehicleModel(),
+                requestForVehicleCreation.getFuelAmount(), requestForVehicleCreation.getDistanceForVehicle()));
         return "Vehicle was successfully created";
     }
 
