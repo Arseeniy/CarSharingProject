@@ -11,15 +11,6 @@ import java.util.Set;
 public class SignupRequest {
 
     @NotBlank
-    private String firstName;
-
-    @NotBlank
-    private String lastName;
-
-    @NotBlank
-    private String birthDate;
-
-    @NotBlank
     @Size(min = 3, max = 20)
     private String username;
 
@@ -31,10 +22,5 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
-
-    @NotBlank
-    private String passportDetails;
-
-    private Set<String> role;
 
 }

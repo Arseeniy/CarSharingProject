@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Arseniy">
+
+        <!--        VEHICLE LIBRARY TABLE-->
+        <createTable tableName="vehicle_library">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="state_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vehicle_model" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vehicle_class" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="doors_count" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passengers_count" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_air_conditioning" type="bool">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_audio" type="bool">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fuel_type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fuel_tank_capacity" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="engine_power" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transmission_type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_available" type="bool">
+                <constraints nullable="false"/>
+            </column>
+            <column name="renting_start" type="date"/>
+            <column name="renting_end" type="date"/>
+        </createTable>
+
+        <!--        FARE LIBRARY TABLE-->
+        <createTable tableName="fare_library">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="vehicle_model" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="day_price" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--        USERS LIBRARY TABLE-->
+        <createTable tableName="users_library">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_vehicle" type="varchar(255)"/>
+
+        </createTable>
+
+        <!--        USERS DATA LIBRARY TABLE-->
+        <createTable tableName="users_data_library">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="birth_date" type="date"/>
+            <column name="passport_number" type="varchar(255)"/>
+            <column name="passport_issue_date" type="date"/>
+            <column name="issuing_authority" type="varchar(255)"/>
+            <column name="registration_place" type="varchar(255)"/>
+            <column name="driver_license_number" type="varchar(255)"/>
+            <column name="dl_issue_date" type="date"/>
+        </createTable>
+
+        <!--        ROLES TABLE-->
+        <createTable tableName="roles">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)">
+            </column>
+        </createTable>
+
+        <!--        USER_ROLES TABLE-->
+        <createTable tableName="user_roles">
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--        ORDERS LIBRARY TABLE-->
+        <createTable tableName="orders_library">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vehicle_model" type="varchar(255)"/>
+            <column name="state_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_status" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="day_price" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rent_price" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reject_description" type="varchar(255)"/>
+            <column name="damage_price" type="double precision"/>
+            <column name="damage_description" type="varchar(255)"/>
+            <column name="renting_start" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="renting_end" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

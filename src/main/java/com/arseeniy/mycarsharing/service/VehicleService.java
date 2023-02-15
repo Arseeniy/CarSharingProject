@@ -1,20 +1,26 @@
 package com.arseeniy.mycarsharing.service;
 
-import com.arseeniy.mycarsharing.common.dto.VehicleForBooking;
-import com.arseeniy.mycarsharing.common.dto.VehicleViewer;
+import com.arseeniy.mycarsharing.common.dto.*;
 import com.arseeniy.mycarsharing.common.entity.booking.Vehicle;
+import org.springframework.http.ResponseEntity;
 
+import java.util.Date;
 import java.util.List;
 
 public interface VehicleService {
 
-    public List<VehicleViewer> getAvailableVehicleList(List<Vehicle> vehicleList);
+    public String vehicleCreation(RequestForVehicleCreation requestForCreation);
 
-    public VehicleForBooking chooseForBooking(String stateNumber);
+    public List<AvailableVehicleViewer> getAvailableVehicleList(List<Vehicle> vehicleList);
 
-    public int getVehicleRunningDistance(int fuelAmount);
+    public List<AvailableVehicleViewer> getAvailableVehicleListByDate(List<Vehicle> vehicles, Date startDate, Date endDate);
 
-    public String bookVehicle(String stateNumber, String username);
+    public BookingVehicleViewer chooseForBooking(String stateNumber);
 
-    public String closeRenting(String stateNumber, String userName);
+    public ResponseEntity<String> createOrder(OrderCreationRequest orderCreationRequest);
+
+    public String closeVehicleRenting(CloseRentingRequest closeRentingRequest);
+
+    public String rejectVehicleRenting(OrderReject orderReject);
+
 }

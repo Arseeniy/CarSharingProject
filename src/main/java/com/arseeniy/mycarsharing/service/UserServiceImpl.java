@@ -16,7 +16,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     public ResponseEntity<?> authenticateUser(String username, String password) {
 
-        if (!userRepository.existsByUsername(username)){
+        if (!userRepository.existsByUsername(username)) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("User does not exist! Please, try once more or create account"));
@@ -85,38 +84,17 @@ public class UserServiceImpl implements UserService {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getBirthDate(),
+        User user = new User(
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()),
-                signUpRequest.getPassportDetails());
+                encoder.encode(signUpRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "support":
-                        Role supportRole = roleRepository.findByName(ERole.ROLE_SUPPORT)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(supportRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
+        roles.add(roleRepository.findByName(ERole.ROLE_USER).
+                orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 
         user.setRoles(roles);
+
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

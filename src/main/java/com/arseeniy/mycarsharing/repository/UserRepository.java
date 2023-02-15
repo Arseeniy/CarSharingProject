@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -25,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE user_library SET current_vehicle = :NULL WHERE user_name = :userName", nativeQuery = true)
-    void closeRenting(String userName);
+    @Query(value = "UPDATE users_library SET current_vehicle = NULL WHERE user_name = :userName", nativeQuery = true)
+    void closeRenting(@Param("userName") String userName);
 
 }

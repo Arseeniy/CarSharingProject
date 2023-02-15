@@ -8,32 +8,27 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
-
-    List<Vehicle> findAll();
-
     Vehicle findByStateNumber(String stateNumber);
 
     List<Vehicle> findAllByVehicleModel(String vehicleModel);
 
     Boolean existsByStateNumber(String stateNumber);
 
-    void deleteAll();
-
     void deleteByStateNumber(String stateNumber);
 
-    <S extends Vehicle> S save(S entity);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE vehicle_library SET is_available = false, renting_start = :rentingStart, renting_end = :rentingEnd WHERE state_number = :stateNumber", nativeQuery = true)
+    void bookVehicle(@Param("stateNumber") String stateNumber, @Param("rentingStart") LocalDate rentingStart,
+                     @Param("rentingEnd") LocalDate rentingEnd);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE vehicle_library SET status = :true WHERE stateNumber = :stateNumber", nativeQuery = true)
-    void bookVehicle(@Param("stateNumber") String stateNumber);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE vehicle_library SET status = :false WHERE stateNumber = :stateNumber", nativeQuery = true)
-    void closeRenting(String stateNumber);
+    @Query(value = "UPDATE vehicle_library SET is_available = true, renting_start = NULL, renting_end = NULL WHERE state_number = :stateNumber", nativeQuery = true)
+    void closeVehicleRenting(@Param("stateNumber") String stateNumber);
 }

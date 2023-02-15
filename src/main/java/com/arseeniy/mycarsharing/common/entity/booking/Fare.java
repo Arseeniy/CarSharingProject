@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "fare_library")
 public class Fare {
 
@@ -20,16 +19,14 @@ public class Fare {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fareIdSeq")
     private Integer id;
 
-    @Column(name = "vehicleModel")
+    @Column(name = "vehicle_model")
     private String vehicleModel;
 
-    @Column(name = "minutePrice")
-    private Double minutePrice;
-
-    @Column(name = "hourPrice")
-    private Double hourPrice;
-
-    @Column(name = "dayPrice")
+    @Column(name = "day_price")
     private Double dayPrice;
 
+    public Fare(String vehicleModel, Double dayPrice) {
+        this.vehicleModel = vehicleModel;
+        this.dayPrice = dayPrice;
+    }
 }

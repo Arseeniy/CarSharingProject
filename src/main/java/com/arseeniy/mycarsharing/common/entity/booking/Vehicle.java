@@ -1,10 +1,10 @@
 package com.arseeniy.mycarsharing.common.entity.booking;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -25,19 +25,56 @@ public class Vehicle {
     @Column(name = "vehicle_model")
     private String vehicleModel;
 
-    @Column(name = "fuel_amount")
-    private int fuelAmount;
+    @Column(name = "vehicle_class")
+    private String vehicleClass;
 
-    @Column(name = "distance_for_vehicle")
-    private int distanceForVehicle;
+    @Column(name = "doors_count")
+    private int doorsCount;
 
-    @Column(name = "status")
-    private boolean status;
+    @Column(name = "passengers_count")
+    private int passengersCount;
 
-    public Vehicle(String stateNumber, String vehicleModel, int fuelAmount, int distanceForVehicle) {
+    @Column(name = "is_air_conditioning")
+    private boolean isAirConditioning;
+
+    @Column(name = "is_audio")
+    private boolean isAudio;
+
+    @Column(name = "fuel_type")
+    private String fuelType;
+
+    @Column(name = "fuel_tank_capacity")
+    private int fuelTankCapacity;
+
+    @Column(name = "engine_power")
+    private int enginePower;
+
+    @Column(name = "transmission_type")
+    private String transmissionType;
+
+    @Column(name = "is_available")
+    private boolean isAvailable;
+
+    @Column(name = "renting_start")
+    private Date rentingStart;
+
+    @Column(name = "renting_end")
+    private Date rentingEnd;
+
+    public Vehicle(String stateNumber, String vehicleModel, String vehicleClass,
+                   int doorsCount, int passengersCount, boolean isAirConditioning, boolean isAudio,
+                   String fuelType, int fuelTankCapacity, int enginePower, String transmissionType, boolean isAvailable) {
         this.stateNumber = stateNumber;
         this.vehicleModel = vehicleModel;
-        this.fuelAmount = fuelAmount;
-        this.distanceForVehicle = distanceForVehicle;
+        this.vehicleClass = vehicleClass;
+        this.doorsCount = doorsCount;
+        this.passengersCount = passengersCount;
+        this.isAirConditioning = isAirConditioning;
+        this.isAudio = isAudio;
+        this.fuelType = fuelType;
+        this.fuelTankCapacity = fuelTankCapacity;
+        this.enginePower = enginePower;
+        this.transmissionType = transmissionType;
+        this.isAvailable = isAvailable;
     }
 }

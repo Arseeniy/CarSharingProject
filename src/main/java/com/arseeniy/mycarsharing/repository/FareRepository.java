@@ -9,5 +9,4 @@ public interface FareRepository extends JpaRepository<Fare, Long> {
 
     Fare findByVehicleModel(String vehicleModel);
 
-    <S extends Fare> S save(S entity);
 }
