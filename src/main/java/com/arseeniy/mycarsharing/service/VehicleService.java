@@ -17,10 +17,6 @@ public interface VehicleService {
 
     public BookingVehicleViewer chooseForBooking(String stateNumber);
 
-    public ResponseEntity<String> createOrder(OrderCreationRequest orderCreationRequest);
-
     public String closeVehicleRenting(CloseRentingRequest closeRentingRequest);
-
-    public String rejectVehicleRenting(OrderReject orderReject);
 
 }

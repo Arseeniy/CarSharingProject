@@ -14,6 +14,8 @@ public enum OrderStatus {
 
     AWAITING_FOR_CLOSE,
 
-    AWAITING_PAYMENT_FOR_DAMAGE;
+    AWAITING_PAYMENT_FOR_DAMAGE,
+
+    IN_SERVICE;
 
 }

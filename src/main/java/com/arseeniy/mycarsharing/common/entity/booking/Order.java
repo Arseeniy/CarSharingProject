@@ -27,7 +27,7 @@ public class Order {
     @Column(name = "state_number")
     private String stateNumber;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
 
@@ -37,7 +37,7 @@ public class Order {
     @Column(name = "rent_price")
     private Double rentPrice;
 
-    @Column(name = "reject_description)")
+    @Column(name = "reject_description")
     private String rejectDescription;
 
     @Column(name = "damage_price")
@@ -52,14 +52,18 @@ public class Order {
     @Column(name = "renting_end")
     private LocalDate rentingEnd;
 
-    public Order(String username, String stateNumber, String vehicleModel, OrderStatus orderStatus,
-                 Double dayPrice, Double rentPrice, LocalDate rentingStart, LocalDate rentingEnd) {
+    public Order(String username, String vehicleModel, String stateNumber, OrderStatus orderStatus,
+                 Double dayPrice, Double rentPrice, String rejectDescription, Double damagePrice,
+                 String damageDescription, LocalDate rentingStart, LocalDate rentingEnd) {
         this.username = username;
-        this.stateNumber = stateNumber;
         this.vehicleModel = vehicleModel;
+        this.stateNumber = stateNumber;
         this.orderStatus = orderStatus;
         this.dayPrice = dayPrice;
         this.rentPrice = rentPrice;
+        this.rejectDescription = rejectDescription;
+        this.damagePrice = damagePrice;
+        this.damageDescription = damageDescription;
         this.rentingStart = rentingStart;
         this.rentingEnd = rentingEnd;
     }

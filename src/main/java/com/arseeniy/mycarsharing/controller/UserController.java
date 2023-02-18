@@ -65,7 +65,7 @@ public class UserController {
     @PreAuthorize("hasRole('USER') or hasRole('SUPPORT') or hasRole('ADMIN')")
     public ResponseEntity<String> createOrder(@Valid @RequestBody OrderCreationRequest orderCreationRequest) {
 
-        return vehicleService.createOrder(orderCreationRequest);
+        return orderService.createOrder(orderCreationRequest);
     }
 
     //Запрос на досрочное завершение заказа
@@ -87,7 +87,7 @@ public class UserController {
     }
 
     //Достать определенный заказ из истории
-    @GetMapping("/getCertainOrder")
+    @PostMapping("/getCertainOrder")
     @Operation(security = {@SecurityRequirement(name = "bearer-key")})
     @PreAuthorize("hasRole('USER') or hasRole('SUPPORT') or hasRole('ADMIN')")
     public CertainOrderViewer getCertainOrder(@Valid @RequestBody OrderHistoryViewer orderHistoryViewer) {

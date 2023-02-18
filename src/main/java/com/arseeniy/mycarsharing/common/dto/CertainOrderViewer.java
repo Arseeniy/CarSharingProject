@@ -14,6 +14,8 @@ public class CertainOrderViewer {
 
     private String stateNumber;
 
+    private String vehicleModel;
+
     private OrderStatus orderStatus;
 
     private Double pricePerDay;
