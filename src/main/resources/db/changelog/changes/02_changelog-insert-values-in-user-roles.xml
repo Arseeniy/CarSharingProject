@@ -7,6 +7,28 @@
 
     <changeSet id="1" author="Arseniy">
 
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="ROLE_USER">
+                    SELECT name
+                    FROM roles
+                    WHERE id = 1
+                </sqlCheck>
+
+                <sqlCheck expectedResult="ROLE_SUPPORT">
+                    SELECT name
+                    FROM roles
+                    WHERE id = 2
+                </sqlCheck>
+
+                <sqlCheck expectedResult="ROLE_ADMIN">
+                    SELECT name
+                    FROM roles
+                    WHERE id = 3
+                </sqlCheck>
+            </not>
+        </preConditions>
+
         <!--         POPULATE ROLES-->
         <insert tableName="roles">
             <column name="id" value="1"/>

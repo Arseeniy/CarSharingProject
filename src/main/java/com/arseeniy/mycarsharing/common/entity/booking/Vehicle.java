@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -61,9 +62,13 @@ public class Vehicle {
     @Column(name = "renting_end")
     private Date rentingEnd;
 
+    @Column(name = "day_price")
+    private Double dayPrice;
+
     public Vehicle(String stateNumber, String vehicleModel, String vehicleClass,
                    int doorsCount, int passengersCount, boolean isAirConditioning, boolean isAudio,
-                   String fuelType, int fuelTankCapacity, int enginePower, String transmissionType, boolean isAvailable) {
+                   String fuelType, int fuelTankCapacity, int enginePower, String transmissionType,
+                   boolean isAvailable, Double dayPrice) {
         this.stateNumber = stateNumber;
         this.vehicleModel = vehicleModel;
         this.vehicleClass = vehicleClass;
@@ -76,5 +81,6 @@ public class Vehicle {
         this.enginePower = enginePower;
         this.transmissionType = transmissionType;
         this.isAvailable = isAvailable;
+        this.dayPrice = dayPrice;
     }
 }

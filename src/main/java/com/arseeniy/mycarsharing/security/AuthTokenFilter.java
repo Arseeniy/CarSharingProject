@@ -1,6 +1,6 @@
 package com.arseeniy.mycarsharing.security;
 
-import com.arseeniy.mycarsharing.service.security.UserDetailsServiceImpl;
+import com.arseeniy.mycarsharing.security.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

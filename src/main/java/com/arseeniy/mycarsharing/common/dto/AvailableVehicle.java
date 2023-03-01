@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class BookingVehicleViewer {
+public class AvailableVehicle {
 
     private String stateNumber;
 
@@ -13,21 +13,8 @@ public class BookingVehicleViewer {
 
     private String vehicleClass;
 
-    private int doorsCount;
-
-    private int passengersCount;
-
-    private boolean isAirConditioning;
-
-    private boolean isAudio;
-
-    private String fuelType;
-
-    private int fuelTankCapacity;
-
-    private int enginePower;
-
     private String transmissionType;
 
     private double dayPrice;
+
 }

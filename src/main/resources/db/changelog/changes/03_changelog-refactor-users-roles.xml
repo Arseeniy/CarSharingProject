@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Arseniy">
+
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <not>-->
+<!--&lt;!&ndash;                <tableExists tableName="fare_library"/>&ndash;&gt;-->
+
+<!--                <sqlCheck expectedResult="not found">-->
+<!--                    IF EXISTS(-->
+<!--                    SELECT * FROM INFORMATION_SCHEMA.TABLES-->
+<!--                    WHERE TABLE_NAME = 'fare_library'-->
+<!--                    )-->
+<!--                    SELECT 'found' AS search_result ELSE SELECT 'not found' AS search_result;-->
+<!--                </sqlCheck>-->
+
+
+<!--            </not>-->
+<!--        </preConditions>-->
+
+        <sql>
+
+            DROP TABLE fare_library;
+
+            ALTER TABLE vehicle_library ADD day_price double precision;
+
+            DROP TABLE user_roles;
+
+            ALTER TABLE users_library ADD role int, ADD FOREIGN KEY (role) REFERENCES roles (id)
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -18,7 +18,7 @@ public class CertainOrderViewer {
 
     private OrderStatus orderStatus;
 
-    private Double pricePerDay;
+    private Double dayPrice;
 
     private Double rentPrice;
 

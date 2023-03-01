@@ -8,6 +8,19 @@
     <changeSet id="1" author="Arseniy">
 
         <!--        VEHICLE LIBRARY TABLE-->
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="vehicle_library"/>
+                <tableExists tableName="fare_library"/>
+                <tableExists tableName="users_library"/>
+                <tableExists tableName="users_data_library"/>
+                <tableExists tableName="roles"/>
+                <tableExists tableName="user_roles"/>
+                <tableExists tableName="orders_library"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="vehicle_library">
             <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false"/>

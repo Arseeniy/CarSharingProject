@@ -1,14 +1,10 @@
 package com.arseeniy.mycarsharing.common.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class RequestForVehicleCreation {
+public class VehicleCreationRequest {
 
     private String stateNumber;
 
@@ -33,5 +29,7 @@ public class RequestForVehicleCreation {
     private String transmissionType;
 
     private boolean isAvailable;
+
+    private Double dayPrice;
 
 }

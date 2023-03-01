@@ -1,4 +1,4 @@
-package com.arseeniy.mycarsharing.service;
+package com.arseeniy.mycarsharing.service.impl;
 
 import com.arseeniy.mycarsharing.common.dto.payload.request.SignupRequest;
 import com.arseeniy.mycarsharing.common.dto.payload.response.JwtResponse;
@@ -6,12 +6,13 @@ import com.arseeniy.mycarsharing.common.dto.payload.response.MessageResponse;
 import com.arseeniy.mycarsharing.common.entity.authorization.ERole;
 import com.arseeniy.mycarsharing.common.entity.authorization.Role;
 import com.arseeniy.mycarsharing.common.entity.authorization.User;
+import com.arseeniy.mycarsharing.exception.CustomException;
 import com.arseeniy.mycarsharing.repository.RoleRepository;
 import com.arseeniy.mycarsharing.repository.UserRepository;
 import com.arseeniy.mycarsharing.security.JwtUtils;
-import com.arseeniy.mycarsharing.service.security.UserDetailsImpl;
+import com.arseeniy.mycarsharing.security.service.UserDetailsImpl;
+import com.arseeniy.mycarsharing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,12 +43,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public ResponseEntity<?> authenticateUser(String username, String password) {
+    public JwtResponse authenticateUser(String username, String password) {
 
         if (!userRepository.existsByUsername(username)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("User does not exist! Please, try once more or create account"));
+            throw new CustomException("User does not exist! Please, try once more or create account");
         }
 
         Authentication authentication = authenticationManager.authenticate(
@@ -61,26 +60,24 @@ public class UserServiceImpl implements UserService {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(
+        return new JwtResponse(
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles,
-                jwt));
+                jwt);
     }
 
     @Override
-    public ResponseEntity<?> registerUser(SignupRequest signUpRequest) {
+    public MessageResponse registerUser(SignupRequest signUpRequest) {
 
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+
+            throw new CustomException("Error: Username is already taken!");
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+
+            throw new CustomException("Error: Email is already in use!");
         }
 
         // Create new user's account
@@ -89,14 +86,17 @@ public class UserServiceImpl implements UserService {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findByName(ERole.ROLE_USER).
-                orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(roleRepository.findByName(ERole.ROLE_USER).
+//                orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+//
+//        user.setRoles(roles);
 
-        user.setRoles(roles);
+        user.setRole(roleRepository.findByName(ERole.ROLE_USER).
+                orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return new MessageResponse("User registered successfully!");
     }
 }

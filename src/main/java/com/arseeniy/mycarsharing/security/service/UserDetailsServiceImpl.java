@@ -1,4 +1,4 @@
-package com.arseeniy.mycarsharing.service.security;
+package com.arseeniy.mycarsharing.security.service;
 
 import com.arseeniy.mycarsharing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

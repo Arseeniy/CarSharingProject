@@ -1,6 +1,6 @@
 package com.arseeniy.mycarsharing.security;
 
-import com.arseeniy.mycarsharing.service.security.UserDetailsServiceImpl;
+import com.arseeniy.mycarsharing.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,13 +65,13 @@ public class WebSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/swagger-ui/**",
                                         "/swagger-ui.html",
                                         "/swagger-resources/**",
                                         "/api-docs/**").permitAll()
-                .antMatchers("/vehicle/**").permitAll()
+                .antMatchers("/api/v1/vehicle/**").permitAll()
+                .antMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated();
 
 

@@ -11,11 +11,9 @@ import java.util.List;
 
 public interface OrderService {
 
-    public ResponseEntity<String> createOrder(OrderCreationRequest orderCreationRequest);
+    public String createOrder(OrderCreationRequest orderCreationRequest);
 
-    public String rejectOrderRequest(OrderReject orderReject);
 
-    public String confirmOrder(String stateNumber);
 
     public String closeRentingRequest(String stateNumber);
 
@@ -23,8 +21,6 @@ public interface OrderService {
 
     public List<OrderHistoryViewer> getOrderHistory();
 
-    public List<CertainOrderViewer> getOrderListForConfirmation();
 
-    public List<CertainOrderViewer> getOrderListForClose();
 
 }
